@@ -3,7 +3,7 @@
 > 🌳 Keeping the GitHub contribution graph green — every 4 hours, automatically!
 > Powered by [GitHub Actions](https://github.com/features/actions)
 
-[![Auto Commit](https://github.com/BarzzLy/Auto-Commit-Green-Profile/workflows/Auto%20Commit%20Green%20Profile/badge.svg)](https://github.com/BarzzLy/Auto-Commit-Green-Profile/actions)
+[![Auto Commit](https://github.com/BarzzLy/auto-commit/workflows/Auto%20Commit%20Green%20Profile/badge.svg)](https://github.com/BarzzLy/auto-commit/actions)
 
 ---
 
