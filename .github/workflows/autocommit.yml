@@ -1,0 +1,61 @@
+name: Auto Commit Green Profile
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  schedule:
+    - cron: "0 */4 * * *" # Every 4 hours — see https://crontab.guru/#0_*/4_*_*_*
+
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  auto_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔍 Debug Info
+        run: echo "::debug::Ref = ${{ github.ref }}"
+
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: 📝 Update Timestamp
+        run: |
+          d=$(date '+%Y-%m-%dT%H:%M:%SZ')
+          echo "Last updated: $d" > LAST_UPDATED
+          echo "Triggered by: GitHub Actions (auto-commit)" >> LAST_UPDATED
+
+      - name: ✅ Commit Changes
+        run: |
+          git config --local user.email "hidayathulfikri2006@gmail.com"
+          git config --local user.name "BarzzLy"
+          git add -A
+
+          arr[0]="chore(bot): 😂 keep the streak alive"
+          arr[1]="chore(bot): 🚀 auto commit by BarzzLy"
+          arr[2]="chore(bot): 🔥 staying consistent"
+          arr[3]="chore(bot): 💪 never skip a day"
+          arr[4]="chore(bot): 🙏 blessings in every commit"
+          arr[5]="chore(bot): 🌱 growing the green graph"
+          arr[6]="chore(bot): 🐐 GOAT mode activated"
+          arr[7]="chore(bot): 🤖 bot says hi"
+          arr[8]="chore(bot): 🟩 green profile go brrr"
+          arr[9]="chore(bot): 👻 ghost commit detected"
+          arr[10]="chore(bot): ⚡ lightning speed commit"
+          arr[11]="chore(bot): 🎯 on target every day"
+
+          rand=$((RANDOM % ${#arr[@]}))
+
+          git diff --cached --quiet || git commit -m "${arr[$rand]}"
+
+      - name: 🚀 Push to GitHub
+        uses: ad-m/github-push-action@master
+        with:
+          directory: "."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
